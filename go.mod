@@ -1,11 +1,10 @@
 module github.com/Megalotron/GoFlowMeter
 
-go 1.18
+go 1.17
 
 require (
 	github.com/google/gopacket v1.1.19
 	github.com/stretchr/testify v1.7.1
-	golang.org/x/net v0.0.0-20190620200207-3b0461eec859
 )
 
 require (
