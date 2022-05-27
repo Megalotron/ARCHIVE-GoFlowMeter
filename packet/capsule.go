@@ -1,9 +1,14 @@
 package packet
 
 import (
+	"errors"
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 	"strconv"
+)
+
+var (
+	ErrInvalidPacket = errors.New("invalid or corrupted packet")
 )
 
 // Capsule contains some of the packet's fields.
@@ -28,6 +33,11 @@ type Capsule struct {
 
 // NewCapsuleFromPacket creates a new Capsule using a gopacket.Packet to extract relevant fields.
 func NewCapsuleFromPacket(packet gopacket.Packet, id uint64) (*Capsule, error) {
+	// The packet misses crucial information.
+	if packet.NetworkLayer() == nil || packet.TransportLayer() == nil {
+		return nil, ErrInvalidPacket
+	}
+
 	// Packet's source and destination addresses.
 	srcAddress, dstAddress := packet.NetworkLayer().NetworkFlow().Endpoints()
 
