@@ -31,8 +31,8 @@ type Capsule struct {
 	protocol ProtocolNumber
 }
 
-// NewCapsuleFromPacket creates a new Capsule using a gopacket.Packet to extract relevant fields.
-func NewCapsuleFromPacket(packet gopacket.Packet, id uint64) (*Capsule, error) {
+// NewCapsuleFromPCAPPacket creates a new Capsule using a gopacket.Packet to extract relevant fields.
+func NewCapsuleFromPCAPPacket(packet gopacket.Packet, id uint64) (*Capsule, error) {
 	// The packet misses crucial information.
 	if packet.NetworkLayer() == nil || packet.TransportLayer() == nil {
 		return nil, ErrInvalidPacket

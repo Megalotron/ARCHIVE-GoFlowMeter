@@ -1,7 +1,6 @@
 package packet
 
 import (
-	"github.com/Megalotron/GoFlowMeter/pcap"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -44,13 +43,13 @@ func TestNewCapsuleFromPacket(t *testing.T) {
 
 	for _, tt := range testCases {
 		t.Run(tt.name, func(t *testing.T) {
-			reader, err := pcap.NewFileReader(tt.filename)
+			reader, err := NewFileReader(tt.filename)
 			assert.NoError(t, err)
 
 			packet, err := reader.GetNextPacket()
 			assert.NoError(t, err)
 
-			capsule, err := NewCapsuleFromPacket(packet, tt.id)
+			capsule, err := NewCapsuleFromPCAPPacket(packet, tt.id)
 			assert.Equal(t, tt.err, err)
 
 			if tt.err == nil {

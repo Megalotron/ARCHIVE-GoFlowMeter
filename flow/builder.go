@@ -3,16 +3,15 @@ package flow
 import (
 	"errors"
 	"github.com/Megalotron/GoFlowMeter/packet"
-	"github.com/Megalotron/GoFlowMeter/pcap"
 	"io"
 )
 
-// Build fills a flow Container using a PCAP file's content.
+// BuildFromFile fills a flow Container using a PCAP file's content.
 // It reads the file, extract the raw packet and converts it in a packet.Capsule.
 // Then, the packet.Capsule is added in the Container for further computation.
-func (c *Container) Build(filename string) error {
+func (c *Container) BuildFromFile(filename string) error {
 	// Creates the file reader.
-	reader, err := pcap.NewFileReader(filename)
+	reader, err := packet.NewFileReader(filename)
 	if err != nil {
 		return err
 	}
@@ -30,7 +29,7 @@ func (c *Container) Build(filename string) error {
 		}
 
 		// Convert raw packet to capsule.
-		capsule, err := packet.NewCapsuleFromPacket(rawPacket, i)
+		capsule, err := packet.NewCapsuleFromPCAPPacket(rawPacket, i)
 		if err != nil {
 			if errors.Is(err, packet.ErrInvalidPacket) {
 				i -= 1

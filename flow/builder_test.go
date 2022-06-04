@@ -31,7 +31,7 @@ func TestBuild(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			container := NewContainer()
 
-			err := container.Build(tt.filename)
+			err := container.BuildFromFile(tt.filename)
 			assert.Equal(t, tt.expectedErr, err)
 
 			if tt.expectedErr == nil {

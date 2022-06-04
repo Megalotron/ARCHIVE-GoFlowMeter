@@ -1,4 +1,4 @@
-package pcap
+package packet
 
 import (
 	"github.com/google/gopacket"
