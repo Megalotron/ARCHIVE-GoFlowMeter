@@ -13,9 +13,3 @@ type Container struct {
 func NewContainer() *Container {
 	return &Container{}
 }
-
-// addCapsule contains adds a valid capsule in the current flow Container.
-// TODO: Add more details when the method is finished.
-func (c *Container) addCapsule(capsule *packet.Capsule) {
-	c.capsules = append(c.capsules, *capsule)
-}

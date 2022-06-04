@@ -41,7 +41,7 @@ func (c *Container) BuildFromFile(filename string) error {
 		}
 
 		// Adds the capsule to the current flow container.
-		c.addCapsule(capsule)
+		c.capsules = append(c.capsules, *capsule)
 	}
 
 	return nil
